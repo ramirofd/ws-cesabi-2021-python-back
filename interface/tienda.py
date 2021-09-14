@@ -8,15 +8,13 @@ endpoint = Blueprint('tienda', __name__)
 
 @endpoint.route('/tienda', methods=['GET'])
 def tienda():
-    items = None
+    items = []
     try:
         from juego.tienda import TIENDA
         items = TIENDA.items
     finally:
-        response = {
-            'tienda': items,
-        }
-        return jsonpickle.encode(response)
+        print(items)
+        return jsonpickle.encode(items)
 
 
 @endpoint.route('/tienda/comprar', methods=['POST'])
