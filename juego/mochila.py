@@ -1,11 +1,18 @@
-from juego.objeto import Pocion
 
 
 class Mochila:
     def __init__(self, capacidad=10):
-        # pass
         self.capacidad = capacidad
         self.objetos = dict()
+
+    def tiene_espacio(self):
+        return self.cantidad_objetos() < self.capacidad
+
+    def cantidad_objetos(self):
+        total = 0
+        for lista in self.objetos.values():
+            total += len(lista)
+        return total
 
     def guardar(self, objeto):
         if self.tiene_espacio():
@@ -21,13 +28,7 @@ class Mochila:
                 self.objetos.pop(nombre_objeto)
             return obj
 
-    def cantidad_objetos(self):
-        total = 0
-        for lista in self.objetos.values():
-            total += len(lista)
-        return total
 
-    def tiene_espacio(self):
-        return self.cantidad_objetos() < self.capacidad
+
 
 

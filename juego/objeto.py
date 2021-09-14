@@ -1,15 +1,21 @@
 from juego.constants import PNG, URL_ITEM
-from juego.pokemon import MAX_SALUD
 
 
-class Pocion:
-    def __init__(self, nombre, cura, nombre_url='potion', descripcion='', precio=5):
+class Objeto:
+    def __init__(self, nombre, precio, descripcion, nombre_url):
         self.nombre = nombre
         self.descripcion = descripcion
         self.precio = precio
-        self.cura = cura
         self.url = URL_ITEM + nombre_url + PNG
 
-    def aplicar_efecto(self, pokemon):
-        nueva_salud = pokemon.salud + self.cura
-        pokemon.salud = nueva_salud if nueva_salud <= MAX_SALUD else MAX_SALUD
+
+class Pocion(Objeto):
+    def __init__(self, nombre, precio, cura, descripcion='', nombre_url='potion'):
+        super(Pocion, self).__init__(nombre, precio, descripcion, nombre_url)
+        self.cura = cura
+
+
+class PokeBall(Objeto):
+    def __init__(self, nombre, precio, prob_atrapar, descripcion='', nombre_url='poke-ball'):
+        super(PokeBall, self).__init__(nombre, precio, descripcion, nombre_url)
+        self.prob_atrapar = prob_atrapar
