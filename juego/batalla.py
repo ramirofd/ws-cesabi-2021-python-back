@@ -1,4 +1,4 @@
-from enums import TipoMovimiento
+from juego.constants import TipoMovimiento
 
 
 class Batalla:

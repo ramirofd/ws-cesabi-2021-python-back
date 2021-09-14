@@ -1,5 +1,5 @@
-from enums import TipoMovimiento
-from pokemon import MAX_SALUD
+from juego.constants import TipoMovimiento
+from juego.pokemon import MAX_SALUD
 
 
 class Movimiento:

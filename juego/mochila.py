@@ -1,28 +1,33 @@
+from juego.objeto import Pocion
+
 
 class Mochila:
     def __init__(self, capacidad=10):
+        # pass
         self.capacidad = capacidad
-        self.bolsillos = dict()
+        self.objetos = dict()
 
     def guardar(self, objeto):
-        if self.cantidad_objetos() < self.capacidad:
-            if objeto in self.bolsillos:
-                self.bolsillos[objeto] += 1
+        if self.tiene_espacio():
+            if objeto.nombre in self.objetos:
+                self.objetos[objeto.nombre].append(objeto)
             else:
-                self.bolsillos[objeto] = 1
+                self.objetos[objeto.nombre] = [objeto]
 
     def sacar(self, nombre_objeto):
-        for objeto in self.bolsillos.keys():
-            if objeto.nombre == nombre_objeto and self.bolsillos[objeto]>0:
-                self.bolsillos[objeto] -= 1
-                return objeto
+        if nombre_objeto in self.objetos:
+            obj = self.objetos[nombre_objeto].pop(0)
+            if len(self.objetos[nombre_objeto]) == 0:
+                self.objetos.pop(nombre_objeto)
+            return obj
 
     def cantidad_objetos(self):
         total = 0
-        for cantidad in self.bolsillos.values():
-            total += cantidad
-
+        for lista in self.objetos.values():
+            total += len(lista)
         return total
 
+    def tiene_espacio(self):
+        return self.cantidad_objetos() < self.capacidad
 
 
